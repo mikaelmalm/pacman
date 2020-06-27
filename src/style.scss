@@ -1,0 +1,52 @@
+$bgColor: #fff;
+
+html {
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-color: $bgColor;
+  margin: 0;
+
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 28 squares, all 20px = 560
+#grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 560px;
+  height: 560px;
+  border: 1px solid #000;
+
+  div {
+    width: 20px;
+    height: 20px;
+  }
+
+  .pac-dot {
+    background: green;
+    border: 5px solid #fff;
+    box-sizing: border-box;
+  }
+
+  .wall {
+    background: blue;
+  }
+
+  .power-pellet {
+    background: green;
+    border-radius: 10px;
+  }
+
+  .pac-man {
+    background: yellow;
+    border-radius: 10px;
+    border: 0px;
+  }
+}
