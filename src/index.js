@@ -1,16 +1,20 @@
 import "./style.scss";
-import { addPacMan, movePacMan } from "./position";
+import { Game } from "./game";
 
-// run
 document.addEventListener("DOMContentLoaded", () => {
-  init();
-});
-
-const init = () => {
   const grid = document.getElementById("grid");
   const scoreDisplay = document.getElementById("score");
-  const width = 28; // 28*28  = 784 squares
-  let score = 0;
+
+  // Names long forgotten in the end of times, only the chosen one can name them again
+  const enemys = [
+    new enemy("1", 348, 250),
+    new enemy("2", 376, 400),
+    new enemy("3", 351, 300),
+    new enemy("4", 379, 500),
+  ];
+
+  // starting index of player
+  let pacmanCurrentIndex = 490;
 
   // prettier-ignore
   const layout = [
@@ -43,73 +47,23 @@ const init = () => {
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
   ]
-  // 0 - pac-dots
-  // 1 - wall
-  // 2 - ghost-lair
-  // 3 - power-pellet
-  // 4 - empty
 
-  const squares = createBoard({ layout, grid });
+  const game = new Game(grid, scoreDisplay, layout, pacmanCurrentIndex, enemys);
 
-  // starting index of pac-man
-  let pacmanCurrentIndex = 490;
+  game.createBoard();
+  game.addEnemys();
+  game.addPlayer();
 
-  addPacMan({ squares, index: pacmanCurrentIndex });
+  game.start();
+});
 
-  document.addEventListener("keyup", (event) => {
-    pacmanCurrentIndex = movePacMan({ event, squares, pacmanCurrentIndex });
-
-    score = pacDotEaten({
-      squares,
-      index: pacmanCurrentIndex,
-      scoreDisplay,
-      score,
-    });
-  });
-};
-
-const createBoard = ({ layout, grid }) => {
-  // create and append squares
-  // add each square with correct class to the board
-  const squares = new Array(layout.length).fill(0).map((_, index) => {
-    const square = document.createElement("div");
-
-    return grid.appendChild(addLayout({ square, layout, index }));
-  });
-
-  return squares;
-};
-
-const addLayout = ({ square, layout, index }) => {
-  // should have this in a const/map
-  switch (layout[index]) {
-    case 0:
-      square.classList.add("pac-dot");
-      break;
-    case 1:
-      square.classList.add("wall");
-      break;
-    case 2:
-      square.classList.add("ghost-lair");
-      break;
-    case 3:
-      square.classList.add("power-pellet");
-      break;
+class enemy {
+  constructor(className, startIndex, speed) {
+    this.className = className;
+    this.startIndex = startIndex;
+    this.speed = speed;
+    this.currentIndex = startIndex;
+    this.isScared = true;
+    this.timerId = undefined;
   }
-
-  return square;
-};
-
-const pacDotEaten = ({ squares, index, scoreDisplay, score }) => {
-  if (squares[index].classList.contains("pac-dot")) {
-    squares[index].classList.remove("pac-dot");
-    return updateScore({ score, scoreDisplay });
-  }
-  return score;
-};
-
-const updateScore = ({ scoreDisplay, score }) => {
-  const newScore = score + 1;
-  scoreDisplay.innerHTML = score + 1;
-  return newScore;
-};
+}

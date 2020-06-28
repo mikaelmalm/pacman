@@ -1,4 +1,6 @@
 $bgColor: #fff;
+$baseWidth: 80vmin;
+$gridWidth: $baseWidth / 28;
 
 html {
   min-height: 100%;
@@ -20,33 +22,54 @@ body {
 #grid {
   display: flex;
   flex-wrap: wrap;
-  width: 560px;
-  height: 560px;
+  width: 80vmin;
+  height: 80vmin;
   border: 1px solid #000;
 
   div {
-    width: 20px;
-    height: 20px;
+    width: calc(80vmin / 28);
+    height: calc(80vmin / 28);
+  }
+}
+
+.dot {
+  background: green;
+  border: 5px solid #fff;
+  box-sizing: border-box;
+}
+
+.wall {
+  background: blue;
+}
+
+.power-pellet {
+  background: red;
+  border-radius: 50%;
+}
+
+.player {
+  background: yellow;
+  border-radius: 50%;
+  border: 0px;
+}
+
+.enemy {
+  border: 0;
+
+  &-1 {
+    background: red;
+  }
+  &-2 {
+    background: pink;
+  }
+  &-3 {
+    background: purple;
+  }
+  &-4 {
+    background: orange;
   }
 
-  .pac-dot {
-    background: green;
-    border: 5px solid #fff;
-    box-sizing: border-box;
-  }
-
-  .wall {
-    background: blue;
-  }
-
-  .power-pellet {
-    background: green;
-    border-radius: 10px;
-  }
-
-  .pac-man {
-    background: yellow;
-    border-radius: 10px;
-    border: 0px;
+  &-scared {
+    background: aquamarine;
   }
 }
