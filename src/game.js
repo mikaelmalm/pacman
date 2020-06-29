@@ -38,7 +38,7 @@ export class Game {
         square.classList.add("enemy-lair");
         break;
       case LAYOUT.powerUp:
-        square.classList.add("power-pellet");
+        square.classList.add("power-up");
         break;
     }
 
@@ -71,11 +71,11 @@ export class Game {
 
   playerOnPowerUp() {
     const isOnPowerUp = this.squares[this.playerIndex].classList.contains(
-      "power-pellet"
+      "power-up"
     );
 
     if (isOnPowerUp) {
-      this.squares[this.playerIndex].classList.remove("power-pellet");
+      this.squares[this.playerIndex].classList.remove("power-up");
       this.updateScore(10);
 
       this.scareEnemys();
@@ -103,7 +103,7 @@ export class Game {
   gameWin() {
     // This is not an performance-efficient way of doing things
     const dotsLeft = document.querySelectorAll(".dot");
-    const powerUpsLeft = document.querySelectorAll(".power-pellet");
+    const powerUpsLeft = document.querySelectorAll(".power-up");
 
     if (dotsLeft.length <= 0 && powerUpsLeft.length <= 0) {
       this.endGame();
