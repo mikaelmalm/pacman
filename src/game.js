@@ -26,7 +26,6 @@ export class Game {
     });
   }
 
-  // TODO: Rename classes
   addLayout({ square, index }) {
     switch (this.layout[index]) {
       case LAYOUT.dot:
@@ -122,16 +121,14 @@ export class Game {
    * ======================================================
    */
 
-  // TODO: rename classes
   addPlayer(index = this.playerIndex) {
     this.squares[index].classList.add("player");
   }
 
-  // TODO: rename classes
   removePlayer(index = this.playerIndex) {
     this.squares[index].classList.remove("player");
   }
-  // TODO: rename classes
+
   movePlayer(event) {
     clearInterval(this.playerId);
 
@@ -220,12 +217,11 @@ export class Game {
     });
   }
 
-  // TODO: make enemy name dynamic
+  // TODO: Build logic for moving enemys
   addEnemy({ index, name }) {
     this.squares[index].classList.add(`enemy-${name}`, "enemy");
   }
 
-  // TODO: Rename classes
   moveEnemy(enemy) {
     const { squares } = this;
     const directions = [-1, +1, this.width, -this.width];

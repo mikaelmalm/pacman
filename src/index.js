@@ -1,5 +1,6 @@
 import "./style.scss";
 import { Game } from "./game";
+import { Enemy } from "./enemy";
 
 document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("grid");
@@ -7,10 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Names long forgotten in the end of times, only the chosen one can name them again
   const enemys = [
-    new enemy("1", 348, 250),
-    new enemy("2", 376, 400),
-    new enemy("3", 351, 300),
-    new enemy("4", 379, 500),
+    new Enemy("1", 348, 250),
+    new Enemy("2", 376, 400),
+    new Enemy("3", 351, 300),
+    new Enemy("4", 379, 500),
   ];
 
   // starting index of player
@@ -56,14 +57,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   game.start();
 });
-
-class enemy {
-  constructor(className, startIndex, speed) {
-    this.className = className;
-    this.startIndex = startIndex;
-    this.speed = speed;
-    this.currentIndex = startIndex;
-    this.isScared = true;
-    this.timerId = undefined;
-  }
-}
