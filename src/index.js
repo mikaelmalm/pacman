@@ -54,6 +54,5 @@ document.addEventListener("DOMContentLoaded", () => {
   game.createBoard();
   game.addEnemys();
   game.addPlayer();
-
   game.start();
 });

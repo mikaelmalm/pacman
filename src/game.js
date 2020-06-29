@@ -97,7 +97,7 @@ export class Game {
   gameOver() {
     this.endGame();
 
-    // TODO: Add class to gameover screen
+    document.querySelector("body").classList.add("loose");
   }
 
   gameWin() {
@@ -108,7 +108,7 @@ export class Game {
     if (dotsLeft.length <= 0 && powerUpsLeft.length <= 0) {
       this.endGame();
 
-      // TODO: Victory screen
+      document.querySelector("body").classList.add("win");
     }
   }
   /*
@@ -266,7 +266,7 @@ export class Game {
   encounterEnemy(enemy) {
     if (enemy.isScared) {
       this.squares[enemy.currentIndex].classList.remove(
-        enemy.className,
+        `enemy-${enemy.className}`,
         "enemy",
         "enemy-scared"
       );

@@ -1,6 +1,7 @@
 $bgColor: #fff;
 $baseWidth: 80vmin;
 $gridWidth: $baseWidth / 28;
+@import "./ship.scss";
 
 html {
   min-height: 100%;
@@ -16,6 +17,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url(./assets/water.jpg);
+  overflow: hidden;
+}
+
+.legal {
+  color: #fff;
+
+  position: absolute;
+  bottom: 15px;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  * {
+    color: #fff;
+  }
+}
+
+h3 {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 // 28 squares, all 20px = 560
@@ -24,52 +45,119 @@ body {
   flex-wrap: wrap;
   width: 80vmin;
   height: 80vmin;
-  border: 1px solid #000;
+  position: relative;
+  z-index: 1;
+
+  border: 2px dashed #188bbb;
 
   div {
     width: calc(80vmin / 28);
     height: calc(80vmin / 28);
-  }
-}
-
-.dot {
-  background: green;
-  border: 5px solid #fff;
-  box-sizing: border-box;
-}
-
-.wall {
-  background: blue;
-}
-
-.power-pellet {
-  background: red;
-  border-radius: 50%;
-}
-
-.player {
-  background: yellow;
-  border-radius: 50%;
-  border: 0px;
-}
-
-.enemy {
-  border: 0;
-
-  &-1 {
-    background: red;
-  }
-  &-2 {
-    background: pink;
-  }
-  &-3 {
-    background: purple;
-  }
-  &-4 {
-    background: orange;
+    background-image: url(./assets/ground.jpg);
   }
 
-  &-scared {
-    background: aquamarine;
+  .wall {
+    background-image: url(./assets/gras.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .dot {
+    background-image: url(./assets/ground.jpg);
+    background-repeat: no-repeat;
+
+    position: relative;
+    z-index: 1;
+
+    &:after {
+      content: "";
+      position: absolute;
+      height: 50%;
+      width: 50%;
+      background: url("./assets/candy.svg");
+      background-size: cover;
+      z-index: 1;
+      top: 25%;
+      left: 25%;
+      z-index: 1;
+    }
+  }
+
+  .power-pellet {
+    background-image: url(./assets/TileCraftGroundSetVersion2.png);
+    background-repeat: no-repeat;
+    background-size: 200px;
+    background-position: 0px -70px;
+    position: relative;
+    z-index: 1;
+
+    &:after {
+      content: "";
+      position: absolute;
+      height: 90%;
+      width: 90%;
+      background: url("./assets/cake.svg");
+      background-size: cover;
+      z-index: 1;
+      top: 5%;
+      left: 5%;
+    }
+  }
+
+  .player {
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      background-image: url("./assets/dwarf.svg");
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .enemy {
+    border: 0;
+    z-index: 8;
+    // background-color: transparent;
+    background-color: pink;
+
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+    }
+
+    &-1 {
+      &:after {
+        background-image: url(./assets/monster-red.svg);
+      }
+    }
+    &-2 {
+      &:after {
+        background-image: url(./assets/monster-green.svg);
+      }
+    }
+    &-3 {
+      &:after {
+        background-image: url(./assets/monster-purple.svg);
+      }
+    }
+    &-4 {
+      &:after {
+        background-image: url(./assets/monster-yellow.svg);
+      }
+    }
+
+    &-scared {
+      &:after {
+        background-image: url(./assets/monster-cyan.svg);
+      }
+    }
   }
 }

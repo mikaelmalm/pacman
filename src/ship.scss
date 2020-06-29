@@ -1,0 +1,311 @@
+$bg1: #010117;
+$bg2: #0d0d43;
+
+$ship1: #6a0362;
+$ship2: #540d4f;
+$ship3: #c3dc4a;
+
+$glas: cyan;
+
+html {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-image: linear-gradient($bg1, $bg2);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.ship {
+  width: 50vmin;
+  height: 15vmin;
+  background: $ship1;
+  background-image: linear-gradient(
+    to right,
+    $ship1 20%,
+    lighten(purple, 15%) 60%
+  );
+
+  animation: floating 5s infinite;
+
+  border-radius: 15vmin;
+  position: relative;
+
+  &:after {
+    content: "";
+    width: 54vmin;
+    height: 5vmin;
+    background-image: linear-gradient(
+      to right,
+      $ship3 20%,
+      lighten($ship3, 10%)
+    );
+    border-radius: 5vmin;
+
+    position: absolute;
+    top: 5vmin;
+    left: -2vmin;
+  }
+
+  &:before {
+    content: "";
+    width: 25vmin;
+    height: 3.5vmin;
+    background-image: linear-gradient(
+      to right,
+      $ship2 20%,
+      lighten($ship2, 10%)
+    );
+    border-radius: 0 0 5vmin 5vmin;
+
+    position: absolute;
+    bottom: -3.5vmin;
+    left: 12.5vmin;
+    z-index: -1;
+  }
+
+  .glas {
+    height: 20vmin;
+    width: 34vmin;
+    background: $glas;
+
+    position: absolute;
+    top: -20vmin;
+    left: 8vmin;
+    border-radius: 20vmin 20vmin 0 0;
+    background-image: radial-gradient(
+      circle at 180% 180%,
+      $glas 70%,
+      darken($glas, 10%) 80%
+    );
+  }
+}
+
+.beams {
+  position: absolute;
+  height: 20vmin;
+  width: 20vmin;
+  bottom: -25vmin;
+  left: 15vmin;
+  z-index: 8;
+
+  .beam {
+    background-image: linear-gradient(orange, yellow);
+    background-color: yellow;
+    height: 8vmin;
+    width: 2.5vmin;
+    border-radius: 3vmin;
+    animation: beamMovement 0.8s infinite ease;
+
+    position: absolute;
+    left: 1vmin;
+
+    &:nth-child(odd) {
+      height: 6vmin;
+    }
+
+    &:nth-child(2) {
+      left: 6vmin;
+      animation-delay: 0.3s;
+    }
+
+    &:nth-child(3) {
+      left: 11vmin;
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(4) {
+      left: 16vmin;
+      animation-delay: 0.1s;
+    }
+  }
+}
+
+@keyframes beamMovement {
+  0% {
+    top: 0;
+  }
+
+  50% {
+    opacity: 1;
+    top: 0.3vmin;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+.face {
+  width: 20vmin;
+  height: 13vmin;
+  position: relative;
+  top: 2.5vmin;
+  left: 7vmin;
+
+  // blush marks, not sure what they are called in english :):)
+  &:after {
+    content: "";
+    background: radial-gradient(circle at 16% 50%, pink 4%, transparent 4%),
+      radial-gradient(circle at 84% 50%, pink 4%, transparent 4%),
+      linear-gradient(
+        to right,
+        pink 15%,
+        transparent 15%,
+        transparent 85%,
+        pink 85%
+      );
+    width: 100%;
+    height: 1vmin;
+    position: absolute;
+    top: 9vmin;
+    opacity: 1;
+    transition: all 0.25s ease;
+
+    border-radius: 1vmin;
+  }
+
+  .eye {
+    border: 2px solid #000;
+    width: 5vmin;
+    height: 5vmin;
+    border-radius: 50%;
+    position: absolute;
+    top: 2vmin;
+    left: 2vmin;
+
+    background: radial-gradient(circle at 50% 50%, #fff 15%, transparent 15%),
+      radial-gradient(circle at 50% 70%, #000 70%, #fff 70%);
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      width: 5vmin;
+      height: 5vmin;
+
+      background: radial-gradient(circle at 80% 50%, #fff 20%, transparent 20%);
+      transition: all 0.25s ease;
+    }
+
+    &:nth-child(2) {
+      left: 12vmin;
+    }
+  }
+
+  .mouth {
+    height: 2vmin;
+    width: 5vmin;
+
+    border-radius: 50%;
+    border-bottom: 1vmin solid #000;
+
+    position: absolute;
+    bottom: 0;
+    left: 7vmin;
+    transition: all 0.25s ease;
+  }
+}
+
+// animations/hover effects
+.loose .ship {
+  cursor: pointer;
+
+  animation: scared 0.5s infinite;
+  z-index: 1;
+
+  .face {
+    .eye {
+      &:before {
+        top: -1vmin;
+        left: -2.5vmin;
+      }
+    }
+
+    &:after {
+      opacity: 0;
+    }
+
+    .mouth {
+      border-top: 3vmin solid #000;
+      bottom: -3vmin;
+      border-bottom: 0vmin solid transparent;
+    }
+  }
+}
+
+.ship-container {
+  transform: translate(-200%, -200%);
+  position: absolute;
+}
+
+.loose,
+.win {
+  .ship-container {
+    animation: floatIn 5s;
+    animation-fill-mode: forwards;
+
+    z-index: 8;
+  }
+}
+@keyframes floatIn {
+  0% {
+    transform: translate(-200%, -200%);
+  }
+
+  50% {
+    transform: translate(0, 50%);
+  }
+
+  100% {
+    transform: translate(200%, -200%);
+  }
+}
+
+@keyframes scared {
+  0% {
+    transform: rotate(0deg) scale(0.9);
+  }
+
+  25% {
+    transform: rotate(1deg) scale(0.9);
+  }
+
+  75% {
+    transform: rotate(-1deg) scale(0.9);
+  }
+
+  100% {
+    transform: rotate(0deg) scale(0.9);
+  }
+}
+
+@keyframes floating {
+  0% {
+    top: 0;
+    transform: rotate(0deg);
+  }
+
+  25% {
+    top: -0.1vmin;
+    transform: rotate(1deg);
+  }
+
+  75% {
+    top: 0.1vmin;
+    transform: rotate(-1deg);
+  }
+
+  100% {
+    top: 0;
+    transform: rotate(0deg);
+  }
+}
