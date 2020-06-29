@@ -243,7 +243,7 @@ body {
 }
 
 .ship-container {
-  transform: translate(-200%, -200%);
+  transform: translate(-200vmax, -200vmax);
   position: absolute;
 }
 
@@ -256,6 +256,7 @@ body {
     z-index: 8;
   }
 }
+
 @keyframes floatIn {
   0% {
     transform: translate(-200%, -200%);
@@ -266,7 +267,7 @@ body {
   }
 
   100% {
-    transform: translate(200%, -200%);
+    transform: translate(200vmax, -200vmax);
   }
 }
 
